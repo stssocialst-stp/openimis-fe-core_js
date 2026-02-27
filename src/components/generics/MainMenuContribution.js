@@ -5,6 +5,7 @@ import MuiAccordion from "@material-ui/core/Accordion";
 import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
 import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import Typography from "@material-ui/core/Typography";
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -217,7 +218,7 @@ class MainMenuContribution extends Component {
                     {entries.map((entry, idx) => (
                       <div key={`${this.props.header}_${idx}_menuItem`}>
                         <MenuItem onClick={(e) => this.handleMenuSelect(e, entry.route)}  component="a"  href={`${process.env.PUBLIC_URL || ""}${entry.route}`} passHref>
-                          <ListItemIcon>{entry.icon}</ListItemIcon>
+                          <ListItemIcon>{entry.icon || <AssignmentTurnedInIcon />}</ListItemIcon>
                           <ListItemText primary={entry.text}/>
                           
                         </MenuItem>
@@ -243,7 +244,7 @@ class MainMenuContribution extends Component {
     return (
       <Accordion className={this.props.classes.panel} expanded={this.state.expanded} onChange={this.toggleExpanded}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} id={`${this.props.header}-header`}>
-          <IconButton>{this.props.icon}</IconButton>
+          <IconButton>{this.props.icon || <AssignmentTurnedInIcon />}</IconButton>
           <Typography className={this.props.classes.drawerHeading}>{this.props.header}</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -257,7 +258,7 @@ class MainMenuContribution extends Component {
                     this.redirect(entry.route);
                   }}
                 >
-                  {entry.icon && <ListItemIcon>{entry.icon}</ListItemIcon>}
+                  <ListItemIcon>{entry.icon || <AssignmentTurnedInIcon />}</ListItemIcon>
                   <ListItemText primary={entry.text}/>
                 </ListItem>
                 {entry.withDivider && (
