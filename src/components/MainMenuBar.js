@@ -4,6 +4,16 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModulesManager } from "../helpers/modules";
 import MainMenuContribution from "./generics/MainMenuContribution";
+import { Typography } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import { useIntl } from "react-intl";
+
+const DEFAULT_MENU_SECTIONS = [
+  { titleKey: "core.menuSection.programasSociais", items: ["PrlMainMenu", "EducationalModuleMenu", "GrievanceMainMenu"] },
+  { titleKey: "core.menuSection.operacoesFinanceiras", items: ["LegalAndFinanceMainMenu"] },
+  { titleKey: "core.menuSection.monitorizacao", items: ["OpenSearchReportsMenu", "TasksMainMenu"] },
+  { titleKey: "core.menuSection.administracao", items: ["AdminMainMenu", "ProfileMainMenu", "ParametrizacoesMenu"] },
+];
 
 function getMenus(modulesManager, key, rights, menuVariant) {
   const menus = modulesManager.getContribs(key);
@@ -76,7 +86,14 @@ function getUnmatchedMenus(menuConfig, menus, rights, modulesManager, menuVarian
 
 function processMenu(menus) {
   return menus
-    .map((menu) => menu?.component || menu)
+    .map((menu) => {
+      if (!menu) return null;
+      if (typeof menu === 'object' && menu.component) {
+        // menu.id comes from menuConfig merge and preserves the original contribution name
+        return { name: menu.id || menu.name || null, component: menu.component };
+      }
+      return { name: null, component: menu };
+    })
     .filter(Boolean);
 };
 
@@ -97,9 +114,39 @@ function sortMenus(menus, menuConfig) {
   return updatedMenus.sort((a, b) => a.position - b.position);
 }
 
+function groupMenusBySection(menusWithNames, sections) {
+  const result = [];
+  const assignedIndices = new Set();
+
+  for (const section of sections) {
+    const sectionMenus = [];
+    for (const itemName of section.items) {
+      const menuIdx = menusWithNames.findIndex((m, idx) => m.name === itemName && !assignedIndices.has(idx));
+      if (menuIdx !== -1) {
+        sectionMenus.push(menusWithNames[menuIdx]);
+        assignedIndices.add(menuIdx);
+      }
+    }
+    if (sectionMenus.length > 0) {
+      result.push({ titleKey: section.titleKey, menus: sectionMenus });
+    }
+  }
+
+  const uncategorized = menusWithNames.filter((_, idx) => !assignedIndices.has(idx));
+  if (uncategorized.length > 0) {
+    result.push({ titleKey: null, menus: uncategorized });
+  }
+
+  return result;
+}
+
 const MainMenuBar = ({ children = null, contributionKey, reverse = false, menuVariant, ...delegated }) => {
   const modulesManager = useModulesManager();
   const rights = useSelector((state) => state.core?.user?.i_user?.rights || []);
+  const theme = useTheme();
+  const intl = useIntl();
+  const menuSections = modulesManager.getConf("fe-core", "menuSections", DEFAULT_MENU_SECTIONS);
+
   const components = useMemo(() => {
     const components = getMenus(modulesManager, contributionKey, rights, menuVariant);
     if (reverse) {
@@ -107,14 +154,44 @@ const MainMenuBar = ({ children = null, contributionKey, reverse = false, menuVa
     }
     return components;
   }, [contributionKey, reverse, rights, menuVariant]);
-  
+
+  if (menuVariant === "Drawer" && menuSections?.length) {
+    const sections = groupMenusBySection(components, menuSections);
+    return (
+      <>
+        {children}
+        {sections.map((section, sIdx) => (
+          <React.Fragment key={`section_${sIdx}`}>
+            {section.titleKey && (
+              <Typography
+                variant="overline"
+                style={{
+                  padding: '20px 16px 4px',
+                  display: 'block',
+                  color: '#FFFFFF',
+                  fontWeight: 700,
+                  fontSize: '0.7rem',
+                  letterSpacing: '0.08em',
+                }}
+              >
+                {intl.formatMessage({ id: section.titleKey })}
+              </Typography>
+            )}
+            {section.menus.map(({ component: Comp }, mIdx) => (
+              <Comp key={`${contributionKey}_s${sIdx}_${mIdx}`} modulesManager={modulesManager} menuVariant={menuVariant} {...delegated} />
+            ))}
+          </React.Fragment>
+        ))}
+      </>
+    );
+  }
+
   return (
     <>
       {children}
-      {components.map((Comp, idx) => {
-        return <Comp key={`${contributionKey}_${idx}`} modulesManager={modulesManager} menuVariant={menuVariant} {...delegated} />
-        }
-      )}
+      {components.map(({ component: Comp }, idx) => (
+        <Comp key={`${contributionKey}_${idx}`} modulesManager={modulesManager} menuVariant={menuVariant} {...delegated} />
+      ))}
     </>
   );
 };

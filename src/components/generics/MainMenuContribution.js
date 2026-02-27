@@ -26,7 +26,6 @@ import {
 import withModulesManager from "../../helpers/modules";
 import { _historyPush } from "../../helpers/history";
 
-
 const styles = (theme) => ({
   panel: {
     margin: "0 !important",
@@ -111,7 +110,7 @@ function fetchSubmenuConfig(modulesManager, allEntries, entries, menuId, rights)
   const menuConfig = modulesManager.getConf("fe-core", "menus", []);
   const isMenuConfigEmpty = !(menuConfig?.length);
   const submenuMapping = {};
-  const menuIcons = {}; 
+  const menuIcons = {};
   const copyOfEntries = entries;
 
   if (!isMenuConfigEmpty) {
@@ -186,7 +185,7 @@ class MainMenuContribution extends Component {
     this.toggleExpanded(e);
     this.redirect(route);
   };
-  
+
   redirect(route) {
     const { modulesManager, history } = this.props;
     _historyPush(modulesManager, history, route);
@@ -217,10 +216,10 @@ class MainMenuContribution extends Component {
                   <MenuList>
                     {entries.map((entry, idx) => (
                       <div key={`${this.props.header}_${idx}_menuItem`}>
-                        <MenuItem onClick={(e) => this.handleMenuSelect(e, entry.route)}  component="a"  href={`${process.env.PUBLIC_URL || ""}${entry.route}`} passHref>
+                        <MenuItem onClick={(e) => this.handleMenuSelect(e, entry.route)} component="a" href={`${process.env.PUBLIC_URL || ""}${entry.route}`} passHref>
                           <ListItemIcon>{entry.icon || <AssignmentTurnedInIcon />}</ListItemIcon>
-                          <ListItemText primary={entry.text}/>
-                          
+                          <ListItemText primary={entry.text} />
+
                         </MenuItem>
                         {entry.withDivider && (
                           <Divider
@@ -259,7 +258,7 @@ class MainMenuContribution extends Component {
                   }}
                 >
                   <ListItemIcon>{entry.icon || <AssignmentTurnedInIcon />}</ListItemIcon>
-                  <ListItemText primary={entry.text}/>
+                  <ListItemText primary={entry.text} />
                 </ListItem>
                 {entry.withDivider && (
                   <Divider key={`${this.props.header}_${idx}_divider`} className={this.props.classes.drawerDivider} />
