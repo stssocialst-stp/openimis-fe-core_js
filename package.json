@@ -1,14 +1,17 @@
 {
-  "name": "@openimis/fe-core",
+  "name": "@stssocialst-stp/fe-core",
   "version": "1.4.0",
   "description": "openIMIS Frontend Core reference module",
   "license": "AGPL-3.0-only",
-  "repository": "git://github.com/openimis/openimis-fe-core_js.git",
+  "repository": "@stssocialst-stp/openimis-fe-core_js",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "scripts": {
     "build": "rollup -c",
