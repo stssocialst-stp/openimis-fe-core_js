@@ -6,7 +6,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
-import { formatMessage, SearcherActionButton } from "@openimis/fe-core";
+import { formatMessage, SearcherActionButton } from "@stssocialst-stp/fe-core";
 import { withStyles, withTheme } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

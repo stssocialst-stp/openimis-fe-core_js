@@ -11,7 +11,7 @@ import {
   TextInput,
   ValidatedTextInput,
   withModulesManager,
-} from "@openimis/fe-core";
+} from "@stssocialst-stp/fe-core";
 import { roleNameValidationCheck, roleNameValidationClear, roleNameSetValid } from "../actions";
 
 const styles = (theme) => ({

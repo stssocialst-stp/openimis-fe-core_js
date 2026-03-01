@@ -17,7 +17,7 @@ import LoginPage from "../pages/LoginPage";
 import { useAuthentication, useBoolean } from "../helpers/hooks";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import SetPasswordPage from "../pages/SetPasswordPage";
-import { ErrorBoundary } from "@openimis/fe-core";
+import { ErrorBoundary } from "@stssocialst-stp/fe-core";
 import { onLogout } from "../helpers/utils";
 import { RIGHT_VIEW_EU_MODAL } from "../constants";
 import NotFoundPage from "./NotFoundPage";

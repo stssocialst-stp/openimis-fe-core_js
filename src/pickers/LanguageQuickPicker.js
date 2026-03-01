@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Typography, MenuList, MenuItem, Popper, Paper, Grow, ClickAwayListener } from "@material-ui/core";
 import { Public as Globe, ExpandMore } from "@material-ui/icons";
 
-import { SelectDialog } from "@openimis/fe-core";
+import { SelectDialog } from "@stssocialst-stp/fe-core";
 import { changeUserLanguage, fetchLanguages } from "../actions";
 import { getLanguageNameByCode } from "../helpers/utils";
 

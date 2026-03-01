@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput, NumberInput } from "@openimis/fe-core";
+import { TextInput, NumberInput } from "@stssocialst-stp/fe-core";
 import { FIELD_TYPES } from "../constants";
 import { isEmptyObject } from "./utils";
 

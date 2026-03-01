@@ -1,5 +1,5 @@
 import { Grid } from "@material-ui/core";
-import { PublishedComponent, useModulesManager, useTranslations } from "@openimis/fe-core";
+import { PublishedComponent, useModulesManager, useTranslations } from "@stssocialst-stp/fe-core";
 import React from "react";
 
 const RegistersStatusReport = (props) => {

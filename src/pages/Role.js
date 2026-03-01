@@ -16,7 +16,7 @@ import {
   Form,
   coreConfirm,
   Helmet,
-} from "@openimis/fe-core";
+} from "@stssocialst-stp/fe-core";
 import { createRole, updateRole, fetchRole, fetchRoleRights } from "../actions";
 import { RIGHT_ROLE_SEARCH, RIGHT_ROLE_CREATE, RIGHT_ROLE_UPDATE, QUERY_STRING_DUPLICATE } from "../constants";
 import { prepareForComparison } from "../helpers/utils";

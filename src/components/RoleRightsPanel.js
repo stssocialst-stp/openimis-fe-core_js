@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { FormPanel, ProgressOrError, FormattedMessage, formatMessage } from "@openimis/fe-core";
+import { FormPanel, ProgressOrError, FormattedMessage, formatMessage } from "@stssocialst-stp/fe-core";
 import {
   Grid,
   Paper,

@@ -1,4 +1,4 @@
-import { baseApiUrl } from "@openimis/fe-core";
+import { baseApiUrl } from "@stssocialst-stp/fe-core";
 import { EXPORT_FILE_FORMATS } from "../constants";
 import { openBlob } from "./api";
 

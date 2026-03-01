@@ -2,7 +2,7 @@ import React from "react";
 
 import { Typography, Button } from "@material-ui/core";
 
-import { useModulesManager } from "@openimis/fe-core";
+import { useModulesManager } from "@stssocialst-stp/fe-core";
 import { DEFAULT } from "../../constants";
 
 const SearcherActionButton = ({ onClick, startIcon, label }) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import SelectInput from "../components/inputs/SelectInput";
-import { formatMessage } from "@openimis/fe-core";
+import { formatMessage } from "@stssocialst-stp/fe-core";
 import { injectIntl } from "react-intl";
 
 const CustomFilterTypeStatusPicker = ({

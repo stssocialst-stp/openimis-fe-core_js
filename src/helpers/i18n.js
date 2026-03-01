@@ -63,7 +63,7 @@ export function withTooltip(c, t, placement = "bottom") {
 }
 
 export function useTranslations(moduleName, modulesManager) {
-  // TODO: Take modulesManager from the context (once it has been refactored in @openimis/fe)
+  // TODO: Take modulesManager from the context (once it has been refactored in @stssocialst-stp/fe)
   const intl = useIntl();
 
   return {

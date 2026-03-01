@@ -8,7 +8,7 @@ import { withTheme, withStyles } from "@material-ui/core/styles";
 import { FormControl } from "@material-ui/core";
 import { DatePicker as MUIDatePicker } from "@material-ui/pickers";
 import { formatMessage, toISODate } from "../helpers/i18n";
-import { withModulesManager, withHistory } from "@openimis/fe-core";
+import { withModulesManager, withHistory } from "@stssocialst-stp/fe-core";
 import { DEFAULT } from "../constants";
 
 import DatePicker from "react-multi-date-picker";

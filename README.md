@@ -88,7 +88,7 @@ This section outlines where translations for Role Rights (permissions) are manag
 ### Contexts
 
 - `ToastContext`: This context provides toast notification functionality within the application. It enables you to easily display success, error, warning, or informational messages as toast notifications.
-  **To use it**, you need to import `useToast` from `@openimis/fe-core` and use one of the provided functions (e.g., `showSuccess`, `showError`, `showWarning`, `showInfo`) to trigger different types of toast notifications.
+  **To use it**, you need to import `useToast` from `@stssocialst-stp/fe-core` and use one of the provided functions (e.g., `showSuccess`, `showError`, `showWarning`, `showInfo`) to trigger different types of toast notifications.
 
 ### redux actions helpers
 

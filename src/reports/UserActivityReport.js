@@ -1,5 +1,5 @@
 import { Grid } from "@material-ui/core";
-import { PublishedComponent, useModulesManager, useTranslations, ConstantBasedPicker } from "@openimis/fe-core";
+import { PublishedComponent, useModulesManager, useTranslations, ConstantBasedPicker } from "@stssocialst-stp/fe-core";
 import React from "react";
 import { USER_ACTIVITY_REPORT_ACTIONS, USER_ACTIVITY_REPORT_ENTITIES } from "../constants";
 

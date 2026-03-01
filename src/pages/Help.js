@@ -4,7 +4,7 @@ import { IconButton, Tooltip } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { HelpOutline } from "@material-ui/icons";
 
-import { useModulesManager } from "@openimis/fe-core";
+import { useModulesManager } from "@stssocialst-stp/fe-core";
 import { CORE_MIS_CONFLUENCE_URL, DEFAULT_URL, MODULE_NAME } from "../constants";
 import { useTranslations } from "../helpers/i18n";
 

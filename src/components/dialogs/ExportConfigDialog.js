@@ -16,7 +16,7 @@ import { withStyles, withTheme } from "@material-ui/core/styles";
 import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 
-import { useModulesManager, useTranslations } from "@openimis/fe-core";
+import { useModulesManager, useTranslations } from "@stssocialst-stp/fe-core";
 import { isEmptyObject } from "../../helpers/utils";
 
 const styles = (theme) => ({

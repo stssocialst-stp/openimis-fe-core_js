@@ -3,7 +3,7 @@ import { injectIntl } from "react-intl";
 
 import { withTheme, withStyles } from "@material-ui/core/styles";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
-import { useTranslations, useModulesManager } from "@openimis/fe-core";
+import { useTranslations, useModulesManager } from "@stssocialst-stp/fe-core";
 
 const styles = (theme) => ({
   primaryButton: theme.dialog.primaryButton,
