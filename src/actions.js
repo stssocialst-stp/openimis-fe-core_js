@@ -52,7 +52,7 @@ function getCsrfToken() {
 
   const cookies = document.cookie;
   const cookieArray = cookies.split('; ');
-  
+
   const csrfCookie = cookieArray.find(cookie => cookie.startsWith(CSRF_TOKEN_NAME));
   return csrfCookie?.split('=')[1] ?? CSRF_NOT_FOUND;
 }
@@ -87,6 +87,29 @@ function isCsrfError(error) {
   return error?.message?.includes("CSRF token missing or incorrect.");
 }
 
+function isUnauthorizedGraphQLError(response) {
+  const errorMessages = response?.payload?.errors?.map((error) => error?.message).filter(Boolean) ?? [];
+  return errorMessages.some((message) => message.toLowerCase().includes("unauthorized"));
+}
+
+function dispatchGraphQLErrorAlert(dispatch, response) {
+  if (!response?.error && !response?.payload?.errors?.length) {
+    return;
+  }
+
+  if (isUnauthorizedGraphQLError(response)) {
+    dispatch(coreAlert(
+      "Permission denied",
+      "You do not have permission to perform this action.",
+    ));
+    return;
+  }
+
+  if (response?.error) {
+    dispatch(coreAlert(formatServerError(response.payload)));
+  }
+}
+
 export function graphql(payload, type = "GRAPHQL_QUERY", params = {}) {
   let req = type + "_REQ";
   let resp = type + "_RESP";
@@ -117,6 +140,7 @@ export function graphql(payload, type = "GRAPHQL_QUERY", params = {}) {
           ],
         }),
       );
+      dispatchGraphQLErrorAlert(dispatch, response);
       if (response.error) {
         dispatch(coreAlert(formatServerError(response.payload)));
       }
@@ -173,6 +197,7 @@ export function graphqlWithVariables(operation, variables, type = "GRAPHQL_QUERY
         ],
       }),
     );
+    dispatchGraphQLErrorAlert(dispatch, response);
     return response;
   };
 }
@@ -296,7 +321,7 @@ export function login(credentials) {
           dispatch(authError({ message: errorMessage }));
           return { loginStatus: "CORE_AUTH_ERR", message: errorMessage };
         }
-        
+
         const jwtToken = response.payload.data.tokenAuth.token;
         const csrfResponse = await dispatch(fetchCsrfToken(jwtToken));
         const csrfToken = csrfResponse?.payload?.data?.getCsrfToken?.csrfToken;
@@ -462,13 +487,13 @@ export function clearConfirm(confirmed) {
 
 export function openExportConfigDialog() {
   return (dispatch) => {
-    dispatch({ type: "CORE_OPEN_EXPORT_CONFIG_DIALOG"})
+    dispatch({ type: "CORE_OPEN_EXPORT_CONFIG_DIALOG" })
   }
 }
 
 export function closeExportConfigDialog() {
   return (dispatch) => {
-    dispatch({type: "CORE_CLOSE_EXPORT_CONFIG_DIALOG"})
+    dispatch({ type: "CORE_CLOSE_EXPORT_CONFIG_DIALOG" })
   }
 }
 
